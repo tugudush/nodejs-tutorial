@@ -1,6 +1,7 @@
-console.log('starting app...');
+console.log('starting app.js');
 const fs = require('fs');
 const os = require('os');
+const notes = require('./notes.js');
 
 var user = os.userInfo();
 console.log(user);
@@ -17,4 +18,5 @@ fs.appendFile('greetings.txt', 'Hello world!\r\n', function(err) {
 */
 
 // Option 2
-fs.appendFileSync('greetings.txt', `Hello ${username}\r\n`);
+fs.appendFileSync('greetings.txt', `Hello ${username}!\r\n`);
+fs.appendFileSync('greetings.txt', `You are ${notes.age} years old.\r\n`);
