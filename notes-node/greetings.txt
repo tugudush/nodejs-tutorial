@@ -1,4 +1,2 @@
-Hello jerom
-You are 25
 Hello jerom!
-You are 25 years old.
+Hello jerom!
