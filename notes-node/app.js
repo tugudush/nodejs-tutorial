@@ -1,5 +1,11 @@
 console.log('starting app...');
 const fs = require('fs');
+const os = require('os');
+
+var user = os.userInfo();
+console.log(user);
+var username = user.username;
+
 
 // Option 1
 /*
@@ -11,4 +17,4 @@ fs.appendFile('greetings.txt', 'Hello world!\r\n', function(err) {
 */
 
 // Option 2
-fs.appendFileSync('greetings.txt', 'Hello world!\r\n');
+fs.appendFileSync('greetings.txt', `Hello ${username}\r\n`);
