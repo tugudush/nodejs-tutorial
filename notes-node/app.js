@@ -20,3 +20,27 @@ console.log(`array: ${array}`);
 
 var filtered_array = _.uniq(array);
 console.log(`filtered_array: ${filtered_array}`);
+
+console.log(process.argv);
+
+var command = process.argv[2];
+
+if (command === 'add') {
+  console.log('Adding new note');
+} // End of if (command === 'add')
+
+else if (command === 'list') {
+  console.log('Listing all notes');
+} // End of else if (command === 'list')
+
+else if (command === 'read') {
+  console.log('Reading note')
+} // End of else if (command === 'read')
+
+else if (command === 'remove') {
+  console.log('Removing note');
+} // End of else if (command === 'remove')
+
+else {
+  console.log('Command is not recognized')
+}
