@@ -45,7 +45,7 @@ var add_note = function(title, body) {
     notes.push(note);
     console.log('new notes:');
     console.log(notes);  
-    fs.writeFileSync('notes.json', JSON.stringify(notes));
+    fs.writeFileSync('notes.json', JSON.stringify(notes, null, 2));
   } else {
     console.log(`note with title "${title}" already exists`);
   }
