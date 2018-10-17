@@ -9,6 +9,22 @@ var now = moment();
 var add_note = function(title, body) {  
   console.log(`Title: ${title}`);
   console.log(`Body: ${body}`);
+
+  var notes = [];
+
+  var note = {
+    title,
+    body
+  };
+
+  var notes_string = fs.readFileSync('notes.json');
+  var notes = JSON.parse(notes_string);
+
+  notes.push(note);
+  console.log('notes:', notes);
+
+  fs.writeFileSync('notes.json', JSON.stringify(notes));;
+  
 }; // End of module.exports.add_note = function()
 
 var list_notes = function() {
