@@ -13,7 +13,8 @@ var add_note = function(title, body) {
 
   var note = {
     title,
-    body
+    body,
+    date_added: now
   };
   
   var notes_string = fetch_notes();   
@@ -34,12 +35,14 @@ var add_note = function(title, body) {
   if (allow_duplicates) {
     notes.push(note);
     save_notes(notes);
+    return note;
   } // End of if (allow_duplicate)
 
   else {
     if (duplicate_notes.length == 0) {
       notes.push(note);
       save_notes(notes);
+      return note;
     } else {
       console.log(`note with title "${title}" already exists`);
     } // End of if (duplicate_notes.length == 0)

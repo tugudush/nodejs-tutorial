@@ -15,7 +15,16 @@ console.log('command:', command);
 
 if (command === 'add') {
   console.log('Adding new note');
-  notes.add_note(argv.title, argv.body);
+  var note = notes.add_note(argv.title, argv.body);
+  if (note) {
+    console.log('note successfully created');
+    console.log('--');
+    console.log(`Title: ${note.title}`);
+    console.log(`Body: ${note.body}`);
+    console.log(`Date Added: ${note.date_added}`);
+  } else {
+    console.log('there was an error creating the note. check previous errors.');
+  }
 } // End of if (command === 'add')
 
 else if (command === 'list') {
