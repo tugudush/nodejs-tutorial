@@ -6,7 +6,7 @@ const moment = require('moment');
 
 var now = moment();
 
-var add_note = function(title, body) {  
+var add_note = function(title, body) {
   console.log(`Title: ${title}`);
   console.log(`Body: ${body}`);
 
@@ -16,16 +16,32 @@ var add_note = function(title, body) {
     title,
     body
   };
+  
+  var notes_string = '';
+  
+  try {
+    notes_string = fs.readFileSync('notes.json', 'utf8');
+  } catch(e) {
+    //console.log(e.stack);
+    fs.writeFileSync('notes.json', '[]');
+    notes_string = fs.readFileSync('notes.json', 'utf8');
+  } 
 
-  var notes_string = fs.readFileSync('notes.json');
-  var notes = JSON.parse(notes_string);
+  console.log('notes_string:', notes_string);
+
+  if (notes_string) {
+    var notes = JSON.parse(notes_string);
+  } else {
+    fs.writeFileSync('notes.json', '[]');
+  }  
 
   notes.push(note);
-  console.log('notes:', notes);
+  console.log('new notes:');
+  console.log(notes);
 
   fs.writeFileSync('notes.json', JSON.stringify(notes));;
   
-}; // End of module.exports.add_note = function()
+}; // End of var add_note = function(title, body)
 
 var list_notes = function() {
   

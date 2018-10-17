@@ -1,18 +1,13 @@
 const fs = require('fs');
 
-var original_note = {
-  title: 'Some Title',
-  body: 'Some body'
-};
+var content;
 
-var original_note_string = JSON.stringify(original_note);
-
-fs.writeFileSync('notes.json', original_note_string);
-
-var note_string = fs.readFileSync('notes.json');
-var note = JSON.parse(note_string);
-
-console.log('typeof note:', typeof note);
-console.log('note:', note);
-console.log(`title: ${note.title}`);
-console.log(`body: ${note.body}`);
+fs.readFile('test.txt', 'utf8', function(err, data) {
+  if (err) {
+    throw err;
+  } else {
+    content = data;
+    console.log(content);
+  }
+}); // End of var notes_string = fs.readFilec('notes.json', function(err, data) {
+//console.log('notes_string', notes_string);
