@@ -33,13 +33,22 @@ var add_note = function(title, body) {
     var notes = JSON.parse(notes_string);
   } else {
     fs.writeFileSync('notes.json', '[]');
-  }  
+  } // End of if (notes_string)
 
-  notes.push(note);
-  console.log('new notes:');
-  console.log(notes);
+  var duplicate_notes = notes.filter(function(note) {
+    return note.title === title;
+  });
 
-  fs.writeFileSync('notes.json', JSON.stringify(notes));;
+  console.log('duplicate_notes:', duplicate_notes.length);
+
+  if (duplicate_notes.length == 0) {
+    notes.push(note);
+    console.log('new notes:');
+    console.log(notes);  
+    fs.writeFileSync('notes.json', JSON.stringify(notes));
+  } else {
+    console.log(`note with title "${title}" already exists`);
+  }
   
 }; // End of var add_note = function(title, body)
 

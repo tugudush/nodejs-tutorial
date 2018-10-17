@@ -1,1 +1,7 @@
-[{"title":"hello world","body":"lorem ipsum"}]
+[{
+  "title": "hello world",
+  "body": "lorem ipsum"
+}, {
+  "title": "hello world again",
+  "body": "lorem ipsum pa more"
+}]
