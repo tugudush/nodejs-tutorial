@@ -1,16 +1,13 @@
 console.log('starting notes.js');
 
 const fs = require('fs');
-const os = require('os');
 const moment = require('moment');
 
 var now = moment();
 
-var allow_duplicates = true;
+var allow_duplicates = false;
 
-var add_note = function(title, body) {
-  console.log(`Title: ${title}`);
-  console.log(`Body: ${body}`);
+var add_note = function(title, body) {  
 
   var notes = [];
 
@@ -19,23 +16,11 @@ var add_note = function(title, body) {
     body
   };
   
-  var notes_string = '';
-  
-  try {
-    notes_string = fs.readFileSync('notes.json', 'utf8');
-  } catch(e) {
-    //console.log(e.stack);
-    fs.writeFileSync('notes.json', '[]');
-    notes_string = fs.readFileSync('notes.json', 'utf8');
-  } 
+  var notes_string = fetch_notes();   
 
-  console.log('notes_string:', notes_string);
+  //console.log('notes_string:', notes_string);
 
-  if (notes_string) {
-    var notes = JSON.parse(notes_string);
-  } else {
-    fs.writeFileSync('notes.json', '[]');
-  } // End of if (notes_string)
+  notes = parse_notes(notes_string);
 
   var duplicate_notes = notes.filter(function(note) {
     return note.title === title;
@@ -48,17 +33,13 @@ var add_note = function(title, body) {
 
   if (allow_duplicates) {
     notes.push(note);
-    console.log('new notes:');
-    console.log(notes);  
-    fs.writeFileSync('notes.json', JSON.stringify(notes, null, 2));
+    save_notes(notes);
   } // End of if (allow_duplicate)
 
   else {
     if (duplicate_notes.length == 0) {
       notes.push(note);
-      console.log('new notes:');
-      console.log(notes);
-      fs.writeFileSync('notes.json', JSON.stringify(notes, null, 2));
+      save_notes(notes);
     } else {
       console.log(`note with title "${title}" already exists`);
     } // End of if (duplicate_notes.length == 0)
@@ -78,8 +59,36 @@ var remove_note = function(title) {
   console.log(`Title: ${title}`);
 }; // End of var remove_note = function(title)
 
-var save_note = function() {
+var fetch_notes = function() {
+  var notes_string = '';
+  
+  try {
+    notes_string = fs.readFileSync('notes.json', 'utf8');
+  } catch(e) {
+    console.log(e.stack);
+    fs.writeFileSync('notes.json', '[]');
+    notes_string = fs.readFileSync('notes.json', 'utf8');
+  }
 
+  return notes_string;
+} // End of var fetch_notes = function()
+
+var parse_notes = function(notes_string) {
+  var notes = [];
+
+  if (notes_string) {
+    notes = JSON.parse(notes_string);
+    console.log('notes_string is not empty');
+  } else {
+    fs.writeFileSync('notes.json', '[]');
+    console.log('notes_string is empty, adding square brackets!');
+  } // End of if (notes_string)
+
+  return notes;
+} // End of var parse_notes = function(note_string)
+
+var save_notes = function(notes) {
+  fs.writeFileSync('notes.json', JSON.stringify(notes, null, 2));
 } // End of var save_note = function()
 
 module.exports = {
