@@ -7,9 +7,11 @@ const yargs = require('yargs');
 const argv = yargs.argv;
 
 //console.log('Process: ', process.argv);
-console.log('Yargs: ', argv);
+console.log('Yargs:', argv);
 
-var command = process.argv[2];
+//var command = process.argv[2];
+var command = argv._[0];
+console.log('command:', command);
 
 if (command === 'add') {
   console.log('Adding new note');
