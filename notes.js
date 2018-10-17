@@ -6,6 +6,8 @@ const moment = require('moment');
 
 var now = moment();
 
+var allow_duplicates = true;
+
 var add_note = function(title, body) {
   console.log(`Title: ${title}`);
   console.log(`Body: ${body}`);
@@ -39,16 +41,28 @@ var add_note = function(title, body) {
     return note.title === title;
   });
 
-  console.log('duplicate_notes:', duplicate_notes.length);
+  //var duplicate_notes = notes.filter((note) => note.title === title);
 
-  if (duplicate_notes.length == 0) {
+  console.log('duplicate_notes:', duplicate_notes.length);
+  console.log(`allow_duplicates: ${allow_duplicates}`)
+
+  if (allow_duplicates) {
     notes.push(note);
     console.log('new notes:');
     console.log(notes);  
     fs.writeFileSync('notes.json', JSON.stringify(notes, null, 2));
-  } else {
-    console.log(`note with title "${title}" already exists`);
-  }
+  } // End of if (allow_duplicate)
+
+  else {
+    if (duplicate_notes.length == 0) {
+      notes.push(note);
+      console.log('new notes:');
+      console.log(notes);
+      fs.writeFileSync('notes.json', JSON.stringify(notes, null, 2));
+    } else {
+      console.log(`note with title "${title}" already exists`);
+    } // End of if (duplicate_notes.length == 0)
+  } // End of else if (!allow_duplicate)  
   
 }; // End of var add_note = function(title, body)
 
@@ -63,6 +77,10 @@ var read_note = function(title) {
 var remove_note = function(title) {
   console.log(`Title: ${title}`);
 }; // End of var remove_note = function(title)
+
+var save_note = function() {
+
+} // End of var save_note = function()
 
 module.exports = {
   add_note,
