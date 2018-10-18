@@ -55,11 +55,37 @@ var list_notes = function() {
 }; // End of var list_notes = function()
 
 var read_note = function(title) {
-  console.log(`Title: ${title}`);
+  console.log(`Input Title: ${title}`);
+  var notes_string = fetch_notes();
+  var notes = parse_notes(notes_string);
+  var filtered_notes = notes.filter((note) => note.title == title);
+  
+  if (filtered_notes.length >= 1) {
+    return filtered_notes[0];
+  } // End of if (filtered_notes.length >= 1)
+
 }; // End of var read_note = function(title)
 
-var remove_note = function(title) {
-  console.log(`Title: ${title}`);
+var remove_note = function(title) {  
+  var notes_string = fetch_notes();
+  //console.log(`notes_string:\r\n ${notes_string}`);  
+
+  var notes = parse_notes(notes_string);
+  //console.log('notes:\r\n', notes);
+  console.log(`notes length: ${notes.length}`);
+
+  var filtered_notes = notes.filter((note) => note.title !== title);
+  //console.log('filtered_notes:\r\n', filtered_notes);
+  console.log(`filtered_notes length: ${filtered_notes.length}`);
+
+  save_notes(filtered_notes);
+
+  if (notes.length !== 0) {
+    if (notes.length !== filtered_notes.length) {
+      return true;
+    } // End of if (notes.length !== filtered_notes.length)
+  } // End of if (notes.length !== 0)  
+
 }; // End of var remove_note = function(title)
 
 var fetch_notes = function() {
@@ -94,9 +120,17 @@ var save_notes = function(notes) {
   fs.writeFileSync('notes.json', JSON.stringify(notes, null, 2));
 } // End of var save_note = function()
 
+var log_note = function(note) {
+  console.log('--');
+  console.log(`Title: ${note.title}`);
+  console.log(`Body: ${note.body}`);
+  console.log(`Dated Added: ${note.date_added}`);
+} // End of var log_note = function(note)
+
 module.exports = {
   add_note,
   list_notes,
   read_note,
-  remove_note
+  remove_note,
+  log_note
 };

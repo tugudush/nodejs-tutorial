@@ -7,7 +7,7 @@ const yargs = require('yargs');
 const argv = yargs.argv;
 
 //console.log('Process: ', process.argv);
-console.log('Yargs:', argv);
+//console.log('Yargs:', argv);
 
 //var command = process.argv[2];
 var command = argv._[0];
@@ -18,10 +18,7 @@ if (command === 'add') {
   var note = notes.add_note(argv.title, argv.body);
   if (note) {
     console.log('note successfully created');
-    console.log('--');
-    console.log(`Title: ${note.title}`);
-    console.log(`Body: ${note.body}`);
-    console.log(`Date Added: ${note.date_added}`);
+    notes.log_note(note);
   } else {
     console.log('there was an error creating the note. check previous errors.');
   }
@@ -34,12 +31,26 @@ else if (command === 'list') {
 
 else if (command === 'read') {
   console.log('Reading note')
-  notes.read_note(argv.title);
+  var note = notes.read_note(argv.title);
+
+  if (note) {
+    console.log('note found');
+    notes.log_note(note);
+  } else {
+    console.log('note not found!');
+  } // End of if (note)
+
 } // End of else if (command === 'read')
 
 else if (command === 'remove') {
   console.log('Removing note');
-  notes.remove_note(argv.title);
+  var removed = notes.remove_note(argv.title);
+
+  if (removed) {
+    console.log('Note successfully removed.')  
+  } else {
+    console.log('Note not found or notes was initially empty.');
+  }  
 } // End of else if (command === 'remove')
 
 else {
