@@ -1,10 +1,7 @@
-console.log('starting notes.js');
-
 const fs = require('fs');
 const moment = require('moment');
 
 var now = moment();
-
 var allow_duplicates = false;
 
 var add_note = function(title, body) {  
@@ -50,8 +47,10 @@ var add_note = function(title, body) {
   
 }; // End of var add_note = function(title, body)
 
-var list_notes = function() {
-  
+var list_notes = function() {  
+  var notes_string = fetch_notes();
+  var notes = parse_notes(notes_string);
+  return notes;
 }; // End of var list_notes = function()
 
 var read_note = function(title) {
@@ -121,6 +120,7 @@ var save_notes = function(notes) {
 } // End of var save_note = function()
 
 var log_note = function(note) {
+  debugger;
   console.log('--');
   console.log(`Title: ${note.title}`);
   console.log(`Body: ${note.body}`);
