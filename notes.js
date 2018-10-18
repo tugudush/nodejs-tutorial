@@ -71,11 +71,11 @@ var remove_note = function(title) {
 
   var notes = parse_notes(notes_string);
   //console.log('notes:\r\n', notes);
-  console.log(`notes length: ${notes.length}`);
+  //console.log(`notes length: ${notes.length}`);
 
   var filtered_notes = notes.filter((note) => note.title !== title);
   //console.log('filtered_notes:\r\n', filtered_notes);
-  console.log(`filtered_notes length: ${filtered_notes.length}`);
+  //console.log(`filtered_notes length: ${filtered_notes.length}`);
 
   save_notes(filtered_notes);
 
@@ -93,7 +93,8 @@ var fetch_notes = function() {
   try {
     notes_string = fs.readFileSync('notes.json', 'utf8');
   } catch(e) {
-    console.log(e.stack);
+    //console.log(e.stack);
+    console.log('notes.json not found. creating file...');
     fs.writeFileSync('notes.json', '[]');
     notes_string = fs.readFileSync('notes.json', 'utf8');
   }
@@ -106,10 +107,10 @@ var parse_notes = function(notes_string) {
 
   if (notes_string) {
     notes = JSON.parse(notes_string);
-    console.log('notes_string is not empty');
+    //console.log('notes_string is not empty');
   } else {
     fs.writeFileSync('notes.json', '[]');
-    console.log('notes_string is empty, adding square brackets!');
+    //console.log('notes_string is empty, adding square brackets!');
   } // End of if (notes_string)
 
   return notes;

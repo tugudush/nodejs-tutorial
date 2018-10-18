@@ -1,17 +1,12 @@
 [
   {
     "title": "hello world",
-    "body": "Lorem Ipsum",
-    "date_added": "2018-10-17T16:06:53.809Z"
+    "body": "lorem ipsum",
+    "date_added": "2018-10-18T10:14:52.660Z"
   },
   {
-    "title": "test",
-    "body": "testing 123...",
-    "date_added": "2018-10-18T08:25:13.923Z"
-  },
-  {
-    "title": "to do",
-    "body": "masturbate",
-    "date_added": "2018-10-18T08:51:05.139Z"
+    "title": "the quick brown fox",
+    "body": "jumps over the lazy dog near the bank of the river",
+    "date_added": "2018-10-18T10:15:24.232Z"
   }
 ]
