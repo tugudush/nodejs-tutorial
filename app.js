@@ -28,7 +28,7 @@ const argv = yargs
   })
   .help()
   .argv;
-//console.log('argv:', argv);
+console.log('argv:', argv);
 
 var command = argv._[0];
 console.log('command:', command);

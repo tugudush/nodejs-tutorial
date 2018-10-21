@@ -1,7 +1,7 @@
 const fs = require('fs');
 const moment = require('moment');
 
-var now = moment();
+var now = moment().format('YYYY-MM-DD HH:mm A Z');
 var allow_duplicates = false;
 
 var add_note = function(title, body) {  
